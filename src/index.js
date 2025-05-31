@@ -22,8 +22,8 @@ const nameInput = document.querySelector('.popup__input_type_name');
 const jobInput = document.querySelector('.popup__input_type_description');
 const profileTitle = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__description');
-const formElement = document.querySelector('.popup__form');
 
+const profileForm = document.querySelector('.popup__form_type_edit');
 const formAddCard = document.querySelector('.popup_type_new-card .popup__form');
 
 
@@ -32,9 +32,11 @@ const placeLinkInput = formAddCard.elements['link'];
 
 const cardsContainer = document.querySelector('.places__list');
 
-
-
 const addCardPopup = document.querySelector('.popup_type_new-card');
+
+const popupImage = document.querySelector('.popup__image');
+const popupCaption = document.querySelector('.popup__caption');
+const popupImagePopup = document.querySelector('.popup_type_image');
 
 
 
@@ -44,7 +46,7 @@ initialCards.forEach((cardData) => {
 });
 
 
-function handleFormSubmit(evt) {
+function handleProfileFormSubmit(evt) {
   evt.preventDefault();
 
   profileTitle.textContent = nameInput.value;
@@ -77,7 +79,7 @@ document.querySelectorAll('.popup').forEach(popup => {
 });
 
 // Отправка формы
-formElement.addEventListener('submit', handleFormSubmit);
+profileForm.addEventListener('submit', handleProfileFormSubmit);
 
 
 // Кнопка открытия попапа добавления карточки
@@ -87,9 +89,11 @@ profileAddButton.addEventListener('click', () => {
 });
 
 
-formAddCard.addEventListener('submit', function (evt) {
+formAddCard.addEventListener('submit', handleAddCardFormSubmit);
+
+function handleAddCardFormSubmit(evt) {
   evt.preventDefault();
-  const cardData = {
+    const cardData = {
     name: placeNameInput.value,
     link: placeLinkInput.value
   };
@@ -97,12 +101,10 @@ formAddCard.addEventListener('submit', function (evt) {
   cardsContainer.prepend(newCard);
   closeModal(addCardPopup);
   formAddCard.reset();
-});
+}
+
 
 function handleCardClick(data) {
-  const popupImage = document.querySelector('.popup__image');
-  const popupCaption = document.querySelector('.popup__caption');
-  const popupImagePopup = document.querySelector('.popup_type_image');
 
   popupImage.src = data.link;
   popupImage.alt = data.name;

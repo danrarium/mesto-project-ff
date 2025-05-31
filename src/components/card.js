@@ -4,8 +4,8 @@ export function handleLikeClick(evt) {
 }
 
 // Обработчик удаления
-export function handleDeleteCard(evt) {
-  evt.target.closest('.card').remove();
+export function handleDeleteCard(cardElement) {
+  cardElement.remove();
 }
 
 // Создание карточки
@@ -23,7 +23,7 @@ export function createCard(data, handleLikeClick, handleDeleteCard, handleCardCl
   cardTitle.textContent = data.name;
 
   likeButton.addEventListener('click', handleLikeClick);
-  deleteButton.addEventListener('click', handleDeleteCard);
+deleteButton.addEventListener('click', () => handleDeleteCard(cardElement));
   cardImage.addEventListener('click', () => handleCardClick(data));
 
   return cardElement;
