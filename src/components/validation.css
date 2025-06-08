@@ -1,0 +1,18 @@
+.popup__error {
+  font-size: 12px;
+  color: rgba(255, 0, 0, 1)
+}
+
+.popup__error_visible {
+  opacity: 1;
+}
+
+.popup__input_type_error {
+  border-bottom: 2px solid #ff0000;
+  margin-bottom: 0;
+}
+
+.popup__button_disabled {
+  background: rgba(0,0,0,0.15);
+  cursor: not-allowed;
+}

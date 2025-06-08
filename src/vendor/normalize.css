@@ -347,3 +347,15 @@ template {
 [hidden] {
   display: none;
 }
+
+.card__like-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.card__like-count {
+  font-size: 13px;
+  font-weight: 400;
+  margin-top: 3px;
+  color: #000;
+}
