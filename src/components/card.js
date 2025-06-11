@@ -1,42 +1,33 @@
+import { likeCard, unlikeCard, deleteCard  } from './api.js';
+
 // Обработчик лайка
 export function handleLikeClick(cardData, userId, likeButton, likeCount) {
   const isLiked = cardData.likes.some(like => like._id === userId);
 
-  // Пример fetch-запроса:
-  fetch(`https://nomoreparties.co/v1/cohort-mag-4/cards/likes/${cardData._id}`, {
-    method: isLiked ? 'DELETE' : 'PUT',
-    headers: {
-      authorization: '807fbaac-f1a0-4f98-8f52-e8c1b5e9cdf2',
-      'Content-Type': 'application/json'
-    }
-  })
-  .then(res => res.json())
-  .then((updatedCard) => {
-    // Обновляем отображение количества лайков и активность кнопки
-    likeCount.textContent = updatedCard.likes.length;
-    likeButton.classList.toggle('card__like-button_is-active', updatedCard.likes.some(like => like._id === userId));
-    // Не забудь обновить cardData.likes на актуальные!
-    cardData.likes = updatedCard.likes;
-  })
-  .catch(err => console.log(err));
+  const apiMethod = isLiked ? unlikeCard : likeCard;
+  apiMethod(cardData._id)
+    .then((updatedCard) => {
+      likeCount.textContent = updatedCard.likes.length;
+      likeButton.classList.toggle(
+        'card__like-button_is-active',
+        updatedCard.likes.some(like => like._id === userId)
+      );
+      cardData.likes = updatedCard.likes;
+    })
+    .catch(err => {
+      // обработка ошибок (можно alert или console.log)
+      console.error('Ошибка лайка:', err);
+    });
 }
 
 export function handleDeleteClick(cardId, cardElement) {
-  fetch(`https://nomoreparties.co/v1/cohort-mag-4/cards/${cardId}`, {
-    method: 'DELETE',
-    headers: {
-      authorization: '807fbaac-f1a0-4f98-8f52-e8c1b5e9cdf2',
-      'Content-Type': 'application/json'
-    }
-  })
-  .then(res => {
-    if (!res.ok) throw new Error('Не удалось удалить карточку');
-    // Удаляем DOM-элемент только после успешного ответа от сервера
-    cardElement.remove();
-  })
-  .catch((err) => {
-    alert('Ошибка удаления карточки: ' + err);
-  });
+  deleteCard(cardId)
+    .then(() => {
+      cardElement.remove();
+    })
+    .catch((err) => {
+      alert('Ошибка удаления карточки: ' + err);
+    });
 }
 
 // Создание карточки
@@ -66,26 +57,10 @@ export function createCard(data, userId, handleLikeClick, openConfirmDeletePopup
   cardImage.addEventListener('click', () => handleCardClick(data));
 
    if (data.owner._id !== userId) {
-    deleteButton.style.display = 'none'; // скрыть если чужая
-  } else {
-    deleteButton.addEventListener('click', () => openConfirmDeletePopup(data._id, cardElement));
-  }
-
-  return cardElement;
+  deleteButton.remove(); // удаляем из DOM
+} else {
+  deleteButton.addEventListener('click', () => openConfirmDeletePopup(data._id, cardElement));
 }
 
-export function deleteCardFromServer(cardId) {
-  return fetch(`https://nomoreparties.co/v1/cohort-mag-4/cards/${cardId}`, {
-    method: 'DELETE',
-    headers: {
-      authorization: '807fbaac-f1a0-4f98-8f52-e8c1b5e9cdf2',
-      'Content-Type': 'application/json'
-    }
-  })
-  .then(res => {
-    if (!res.ok) {
-      throw new Error('Не удалось удалить карточку');
-    }
-    return res.json();
-  });
+  return cardElement;
 }

@@ -21,3 +21,53 @@
   right: 0;
   z-index: 10;
 }
+
+.popup_content_confirm-delete{
+  min-width: 358px;
+  min-height: 181px;
+}
+
+.popup__button_type_confirm {
+  margin-top: 38px;
+}
+
+.popup_content_update-avatar{
+  min-width: 430px;
+  min-height: 272px;
+}
+
+.profile__image {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.profile__avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.profile__avatar-edit {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.8);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.profile__image:hover .profile__avatar-edit {
+  opacity: 1;
+}
+
+.profile__avatar-edit::before {
+  content: "";
+  display: block;
+  width: 26px;
+  height: 26px;
+  background: url('../../images/add-icon.svg') center/contain no-repeat;
+}

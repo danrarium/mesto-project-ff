@@ -39,9 +39,9 @@
       <button type="button" class="popup__close"></button>
       <h3 class="popup__title">Редактировать профиль</h3>
       <form class="popup__form popup__form_type_edit" name="edit-profile">
-        <input type="text" name="name" class="popup__input popup__input_type_name" placeholder="Имя" id="name-input" required>
+        <input type="text" name="name" class="popup__input popup__input_type_name" placeholder="Имя" id="name-input" required minlength="2" maxlength="40" pattern="^[a-zA-Zа-яА-ЯёЁ\- ]+$" data-error-pattern="Разрешены только буквы, пробелы и дефис.">
         <span class="popup__error" id="name-input-error"></span>
-        <input type="text" name="description" class="popup__input popup__input_type_description" placeholder="Занятие" id="description-input" required>
+        <input type="text" name="description" class="popup__input popup__input_type_description" placeholder="Занятие" id="description-input" required minlength="2" maxlength="40" pattern="^[a-zA-Zа-яА-ЯёЁ\- ]+$" data-error-pattern="Разрешены только буквы, пробелы и дефис.">
         <span class="popup__error" id="description-input-error"></span>
         <button type="submit" class="button popup__button">Сохранить</button>
       </form>
@@ -52,9 +52,9 @@
       <button type="button" class="popup__close"></button>
       <h3 class="popup__title">Новое место</h3>
       <form class="popup__form" name="new-place">
-        <input type="text" name="place-name" class="popup__input popup__input_type_card-name" placeholder="Название" id="place-name-input" required>
+        <input type="text" name="place-name" class="popup__input popup__input_type_card-name" placeholder="Название" id="place-name-input" required minlength="2" maxlength="40" pattern="^[a-zA-Zа-яА-ЯёЁ\- ]+$" data-error-pattern="Разрешены только буквы, пробелы и дефис.">
         <span class="popup__error" id="place-name-input-error"></span>
-        <input type="url" name="link" class="popup__input popup__input_type_url" placeholder="Ссылка на картинку" id="place-link-input" required>
+        <input type="url" name="link" class="popup__input popup__input_type_url" placeholder="Ссылка на картинку" id="place-link-input" required   pattern="https?://.*\.(jpg|jpeg|png|gif|webp)" data-error-pattern="Введите корректную ссылку на изображение.">
         <span class="popup__error" id="place-link-input-error"></span>
         <button type="submit" class="button popup__button">Сохранить</button>
       </form>

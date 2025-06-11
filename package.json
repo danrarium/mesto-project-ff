@@ -42,8 +42,5 @@
   "bugs": {
     "url": "https://github.com/danrarium/mesto-project-ff/issues"
   },
-  "homepage": "https://github.com/danrarium/mesto-project-ff",
-  "gh-pages": {
-    "repo": "https://github.com/danrarium/mesto-project-ff.git"
-  }
+  "homepage": "https://danrarium.github.io/mesto-project-ff"
 }

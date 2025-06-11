@@ -2,8 +2,7 @@ import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import './pages/index.css';
 import './images/avatar.jpg';
-import './components/validation.css';
-import './components/popup.css';
+import './blocks/validation/validation.css';
 import { openModal, closeModal } from './components/modal.js';
 import { createCard, handleLikeClick, handleDeleteClick } from './components/card.js';
 import { enableValidation, clearValidation} from './components/validation.js';
@@ -45,6 +44,10 @@ const popupImagePopup = document.querySelector('.popup_type_image');
 
 const saveButton = profileForm.querySelector('.popup__button');
 const profileAvatar = document.querySelector('.profile__image');
+
+document.querySelectorAll('.popup').forEach(popup => {
+  popup.classList.add('popup_is-animated');
+});
 
 
 let userId; 
@@ -103,13 +106,12 @@ formAddCard.addEventListener('submit', handleAddCardFormSubmit);
 
 function handleAddCardFormSubmit(evt) {
   evt.preventDefault();
-
+  const saveButton = evt.submitter;
   const cardData = {
     name: placeNameInput.value,
     link: placeLinkInput.value
   };
 
-  const saveButton = formAddCard.querySelector('.popup__button');
   saveButton.textContent = 'Сохранение...';
   saveButton.disabled = true;
 
